@@ -468,6 +468,7 @@ RCT_NOT_IMPLEMENTED(-initWithCoder:(NSCoder *)aDecoder)
 
     NSMutableDictionary *newValue = [self dataForRow:indexPath.item section:indexPath.section];
     newValue[@"target"] = self.reactTag;
+    newValue[@"type"] = @"selected";
     newValue[@"selectedIndex"] = [NSNumber numberWithInteger:indexPath.item];
     newValue[@"selectedSection"] = [NSNumber numberWithInteger:indexPath.section];
 
@@ -496,9 +497,10 @@ RCT_NOT_IMPLEMENTED(-initWithCoder:(NSCoder *)aDecoder)
     NSLog(@"accessoryButtonTappedForRowWithIndexPath %@", indexPath);
     NSMutableDictionary *newValue = [self dataForRow:indexPath.item section:indexPath.section];
     newValue[@"target"] = self.reactTag;
+    newValue[@"type"] = @"accessory";
     newValue[@"accessoryIndex"] = [NSNumber numberWithInteger:indexPath.item];
     newValue[@"accessorySection"] = [NSNumber numberWithInteger:indexPath.section];
-    [_eventDispatcher sendInputEventWithName:@"onAccessoryPress" body:newValue];
+    [_eventDispatcher sendInputEventWithName:@"press" body:newValue];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
